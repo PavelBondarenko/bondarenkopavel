@@ -6,5 +6,5 @@ if (!empty($_POST['text']) && !empty($_POST['name'])) {
         "INSERT INTO `table2` VALUES(null, '$_POST[text]', '$_POST[name]' ) "
 
     );
-    header('Location: bd.php');
+    header('Location: index.php');
 }
