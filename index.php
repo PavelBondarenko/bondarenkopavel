@@ -18,8 +18,6 @@ Server: remotemysql.com
 
 Port: 3306 -->
 
-//
-
 
 
 <body>
@@ -31,7 +29,7 @@ Port: 3306 -->
     echo "<table border = '1'>\n";
     while ($row = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td><b>" . smile($row->text) . "</b><i>$row->name</i><br></td>";
+        echo "<td><b>" . smile($row->text)  . "</td> <td> </b><i>$row->name</i><br></td>";
         echo "</tr>";
     }
     $result->free();
