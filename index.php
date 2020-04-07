@@ -32,10 +32,8 @@ include("conect.php");
 include("smile.php");
 if (!isset($_SESSION['col'])) {
   $_SESSION['col'] = 1;
-} // дали значение переменной
-
-
-echo $_SESSION['col']++;
+}
+echo  "Количество посещений: " . $_SESSION['col']++;
 
 echo "<br>";
 
