@@ -25,15 +25,13 @@ Port: 3306 -->
     include('conect.php');
     include('smile.php');
 
-
     $per_page=10;
-    $result = $mysqli->query('SELECT COUNT(*) FROM `table2` ');
+    $result = $mysqli->query('SELECT * FROM `table2`');
     $a = $result->fetch_array();
-    $num_pages = ceil($a[0] / $per_page); 
+    $num_pages = ceil($a[0] / $per_page);
     echo  " Количество записей:$a[0]";
-    $result = $mysqli->query("SELECT * FROM `table2` Order by id DESC limit  $per_page");
-    echo "<table border = '1'>\n";
-
+    $result = $mysqli->query("SELECT * FROM `table2` Order by id DESC limit $_GET[sum],  $per_page");
+    echo "<table border = '2'>\n";
     while ($row = $result->fetch_object()) {
         echo "<tr>";
         echo "<td><b>" . smile($row->text)  . "</td> <td> </b><i>$row->name</i><br></td>";
@@ -41,12 +39,12 @@ Port: 3306 -->
     }
     // $a = $mysqli->query("SELECT COUNT(1) FROM `table2`");
     // $b = mysqli_fetch_array( $a );
-    // echo  " Количество записей:$b[0]";
+    // echo  " Количество записей: $b[0]";
     echo "</table>\n";
-    echo "<a href='index.php'>1</a>\t\n";
-    for ($i = $per_page, $c = 2;  $c <= $num_pages; $i = $i + $per_page, $c++) {
 
-      echo "<a href='page.php?sum=$i'>$c</a>\t";
+    echo "<a href='index.php'>1</a>";
+    for ($i = $per_page,   $i = $i + $per_page; $i++) {
+      echo "<a href='page.php?sum=$i'></a>";
     }
     $result->free();
     $mysqli->close();
@@ -57,3 +55,5 @@ Port: 3306 -->
         <input type="submit" value="ok">
     </form>
 </body>
+
+</html>
