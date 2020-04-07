@@ -13,3 +13,7 @@ function smile($emodzi)
         $emodzi
     );
 }
+function censor($text)
+{
+    return  preg_match('/(дурак|редиска)/iu', $text) ? false : true;
+}
