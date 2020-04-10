@@ -41,10 +41,8 @@ echo "<br>";
 if (!isset($_SESSION['time'])) {
   $_SESSION['time'] = time();
 }
-if (isset($_SESSION['time'])) {
-  $time = time() - $_SESSION['time'];
-}
-echo  "Вы находитесь на сайте:   $time c";
+$time = mktime(0, 0, (time() - $_SESSION['time']));
+echo  "Вы находитесь на сайте:" . date('H:i:s', $time);
 
 echo "<br>";
 // $time_in_site = $time_in_site + date('s', $_SESSION['show_time'] - 60 * 60 * 3);
