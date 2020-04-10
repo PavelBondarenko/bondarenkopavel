@@ -30,6 +30,7 @@ session_start();
 include("config.php");
 include("conect.php");
 include("smile.php");
+
 if (!isset($_SESSION['col'])) {
   $_SESSION['col'] = 1;
 }
@@ -37,6 +38,16 @@ echo  "Количество посещений: " . $_SESSION['col']++;
 
 echo "<br>";
 
+if (!isset($_SESSION['time'])) {
+  $_SESSION['time'] = time();
+}
+if (isset($_SESSION['time'])) {
+  $time = time() - $_SESSION['time'];
+}
+echo  "На сайте:   $time c";
+
+echo "<br>";
+// $time_in_site = $time_in_site + date('s', $_SESSION['show_time'] - 60 * 60 * 3);
 if (isset($_SESSION['bantime']) && ($_SESSION['bantime'] > time())) {
   echo "<div class= 'ban'>" . "Вы забаненны на: " . ($_SESSION['bantime'] - time()) . "с!" . "</div>";
 }
@@ -96,50 +107,3 @@ $mysqli->close();
 </body>
 
 </html>
-<!-- <body>
-    <?php
-    include('config.php');
-    include('conect.php');
-    include('smile.php');
-
-    $pagecount = ceil($a / $pagessize);
-
-    $currientpage = $_GET['page'] ?? 1;
-
-    $startrow = ($currientpage - 1)  *  $pagessize;
-
-    $pageination = "<div class= 'pageination'>";
-    $result = $mysqli->query('SELECT COUNT(*) FROM `table2` ');
-    $a = $result->fetch_array();
-    $num_pages = ceil($a[0] / $per_page);
-    echo  " Количество записей:$a[0]";
-    $result = $mysqli->query("SELECT * FROM `table2`  LIMIT  $startrow, $pagessize");
-    echo "<table border = '1'>\n";
-
-    while ($row = $result->fetch_object()) {
-      echo "<tr>";
-      echo "<td><b>" . smile($row->text)  . "</td> <td> </b><i>$row->name</i><br></td>";
-      echo "</tr>";
-    }
-    // $a = $mysqli->query("SELECT COUNT(1) FROM `table2`");
-    // $b = mysqli_fetch_array( $a );
-    // echo  " Количество записей:$b[0]";
-    echo "</table>\n";
-    // echo "<a href='index.php'>1</a>\t\n";
-    for ($i = 1; $i <= $pageination; $i++) {
-      $pageination .= "<a href = '?page=$i'> $i</a>";
-    }
-
-    // for ($i = $per_page, $c = 2;  $c <= $num_pages; $i = $i + $per_page, $c++) {
-
-    //   echo "<a href='page.php?sum=$i'>$c</a>\t";
-    // }
-    $result->free();
-    $mysqli->close();
-    ?>
-    <form action="add.php" method="POST">
-        <textarea name="text" cols="30" rows="10"></textarea> <br>
-        <input type="text" name="name"><br>
-        <input type="submit" value="ok">
-    </form>
-</body> -->
